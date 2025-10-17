@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarthak Patil - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.2);
+        }
+
+        nav .logo {
+            font-size: 2.5rem;
+            color: #ff6464;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ff6464;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6464;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #ff6464;
+            transform: scale(1.2);
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            padding: 6rem 5%;
+            min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 100, 100, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(255, 100, 100, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 100, 100, 0.4);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            box-shadow: 0 20px 60px rgba(255, 100, 100, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .placeholder-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(255, 100, 100, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: #ff6464;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            animation: slideInLeft 0.8s ease 0.1s both;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cccccc;
+            margin-bottom: 2.5rem;
+            animation: slideInLeft 0.8s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: #ff6464;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.8s ease 0.3s both;
+        }
+
+        .cta-button:hover {
+            background: #ff5050;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 100, 100, 0.3);
+        }
+
+        /* About Page */
+        .about-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #ff6464;
+        }
+
+        .about-content {
+            margin-top: 3rem;
+            display: grid;
+            gap: 2rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #cccccc;
+        }
+
+        .hobbies-box {
+            background: rgba(255, 100, 100, 0.08);
+            padding: 2rem;
+            border-left: 4px solid #ff6464;
+            border-radius: 5px;
+            margin-top: 2rem;
+        }
+
+        .hobbies-box h3 {
+            color: #ff6464;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .hobbies-box p {
+            color: #aaaaaa;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.05), rgba(0, 0, 0, 0.5));
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            margin-bottom: 3rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.4rem;
+            color: #ff6464;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 100, 100, 0.15);
+            border: 2px solid rgba(255, 100, 100, 0.4);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background: #ff6464;
+            border-color: #ff6464;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 100, 100, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 100, 100, 0.08);
+            border: 1px solid rgba(255, 100, 100, 0.2);
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: #ff6464;
+            box-shadow: 0 15px 40px rgba(255, 100, 100, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: #ff6464;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-tech {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-card p {
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Education Section */
+        .education-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(255, 100, 100, 0.05), rgba(0, 0, 0, 0.5));
+        }
+
+        .education-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .education-table th {
+            background: rgba(255, 100, 100, 0.2);
+            color: #ff6464;
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 2px solid #ff6464;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .education-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid rgba(255, 100, 100, 0.2);
+            color: #cccccc;
+        }
+
+        .education-table tr:hover {
+            background: rgba(255, 100, 100, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 100, 100, 0.08);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff6464;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 100, 100, 0.2);
+        }
+
+        .contact-item strong {
+            color: #ff6464;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #ff6464;
+        }
+
+        .form-container {
+            background: rgba(255, 100, 100, 0.08);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 100, 100, 0.2);
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: #ff6464;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 100, 100, 0.2);
+            color: #fff;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(200, 200, 200, 0.5);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6464;
+            background: rgba(255, 100, 100, 0.1);
+            box-shadow: 0 0 15px rgba(255, 100, 100, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #ff6464;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #ff5050;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 100, 100, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            border-top: 1px solid rgba(255, 100, 100, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .about-section, .skills-container, .projects-section, .education-container, .contact-section {
+                padding: 3rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .social-icons {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        
+        <ul>
+            <li><a class="nav-link active" data-page="home">Home</a></li>
+            <li><a class="nav-link" data-page="about">About</a></li>
+            <li><a class="nav-link" data-page="skills">Skills</a></li>
+            <li><a class="nav-link" data-page="projects">Portfolio</a></li>
+            <li><a class="nav-link" data-page="education">Education</a></li>
+            <li><a class="nav-link" data-page="contact">Contact</a></li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/sarthak-patil" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:sarthakpatil4455@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="hero-image">
+                <div class="placeholder-image">  <img src="photo.jpg" alt="Sarthak Patil"></div>
+            </div>
+            <div class="hero-content">
+                <h1>I'm Sarthak Patil</h1>
+                <p class="subtitle">A Computer Science student specializing in AI & ML</p>
+                <p>I'm passionate about building innovative solutions using modern technologies. Let me create intelligent systems that make a difference in the world. From AI to Web Development, I'm ready to bring your ideas to life.</p>
+                <button class="cta-button nav-link" data-page="contact">Get in touch</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="about-section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>
+                    Hello! I'm Sarthak Patil, a Computer Science (AI–ML) student currently studying at DKTE College. My education journey started from K.P.S.P School, continued through Willingdon College, and now I'm pursuing my engineering dream.
+                </p>
+                <p>
+                    My goal is to work in a multinational company and grow into a strong technical professional in the field of Artificial Intelligence and Software Development. I thrive on solving complex problems and creating elegant solutions.
+                </p>
+                <p>
+                    I believe in continuous learning, teamwork, and creative thinking. I'm passionate about exploring how AI can make life easier and solving real-world problems through technology and innovation.
+                </p>
+                <div class="hobbies-box">
+                    <h3>🎮 Hobbies & Interests</h3>
+                    <p>Playing games • Problem-solving • Watching movies • Traveling • Learning new technologies • Open-source contribution</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Page -->
+    <div id="skills" class="page">
+        <div class="skills-section">
+            <div class="skills-container">
+                <h2 class="section-title">Skills & Expertise</h2>
+
+                <div class="skill-category">
+                    <h3>💬 Programming Languages</h3>
+                    <div class="skill-tags">
+                        <div class="skill-tag">C</div>
+                        <div class="skill-tag">C++</div>
+                        <div class="skill-tag">Java</div>
+                        <div class="skill-tag">Python</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🌐 Web Technologies</h3>
+                    <div class="skill-tags">
+                        <div class="skill-tag">HTML</div>
+                        <div class="skill-tag">CSS</div>
+                        <div class="skill-tag">JavaScript</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🗄️ Database</h3>
+                    <div class="skill-tags">
+                        <div class="skill-tag">MySQL</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🛠️ Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <div class="skill-tag">Git</div>
+                        <div class="skill-tag">Visual Studio Code</div>
+                        <div class="skill-tag">Eclipse</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🧠 Areas of Interest</h3>
+                    <div class="skill-tags">
+                        <div class="skill-tag">Artificial Intelligence</div>
+                        <div class="skill-tag">Machine Learning</div>
+                        <div class="skill-tag">Web Development</div>
+                        <div class="skill-tag">Data Analysis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Page -->
+    <div id="projects" class="page">
+        <div class="projects-section">
+            <h2 class="section-title">My Projects</h2>
+            
+            <div class="project-card">
+                <h3>⚡ Prepaid Electricity Billing System</h3>
+                <p class="project-tech">HTML • CSS • JavaScript • Java</p>
+                <p>A comprehensive web-based system designed to monitor and recharge electricity balance for households. This project showcases full-stack development capabilities with an interactive frontend and robust backend logic for managing billing operations.</p>
+            </div>
+
+            <div class="project-card">
+                <h3>🌾 KrishiConnect – Greenhouse Management System</h3>
+                <p class="project-tech">HTML • CSS • JavaScript • Java • MySQL</p>
+                <p>A smart farming platform that helps farmers monitor greenhouse conditions in real-time. It provides data analytics, environmental tracking, and automated alerts to optimize crop growth. This project demonstrates my ability to build solutions for real-world agricultural challenges.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Page -->
+    <div id="education" class="page">
+        <div class="education-section">
+            <div class="education-container">
+                <h2 class="section-title">Education</h2>
+                <table class="education-table">
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Institution</th>
+                            <th>Year</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Primary</td>
+                            <td>K.P.S.P School</td>
+                            <td>2021</td>
+                            <td>Basic education</td>
+                        </tr>
+                        <tr>
+                            <td>Secondary</td>
+                            <td>Willingdon College</td>
+                            <td>2023</td>
+                            <td>Completed higher secondary education</td>
+                        </tr>
+                        <tr>
+                            <td>Degree</td>
+                            <td>DKTE College</td>
+                            <td>Current</td>
+                            <td>B.Tech in Computer Science (AI–ML)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <div class="contact-section">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>📧 Email</strong>
+                    <a href="mailto:sarthakpatil4455@gmail.com">sarthakpatil4455@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>🗺️ Location</strong>
+                    <span>Maharashtra, India</span>
+                </div>
+                <div class="contact-item">
+                    <strong>🔗 Connect</strong>
+                    <a href="https://www.linkedin.com/in/sarthak-patil" target="_blank" style="display: block; margin-bottom: 0.5rem;">LinkedIn</a>
+                    <a href="https://www.instagram.com" target="_blank">Instagram</a>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>  Sarthak Patil</p>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+
+            window.scrollTo(0, 0);
+        }
+
+        // Add event listeners to nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I will get back to you soon. 😊');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
